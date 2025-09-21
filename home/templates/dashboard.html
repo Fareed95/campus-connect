@@ -1,0 +1,57 @@
+
+
+{% extends "base.html" %}
+
+{% block title %}Home | Campus Connect{% endblock %}
+
+{% block content %}
+
+<!-- Slideshow -->
+<div class="slideshow">
+  <img src="https://picsum.photos/seed/1/1920/1080" alt="slide1">
+  <img src="https://picsum.photos/seed/2/1920/1080" alt="slide2">
+  <img src="https://picsum.photos/seed/3/1920/1080" alt="slide3">
+  <img src="https://picsum.photos/seed/4/1920/1080" alt="slide4">
+</div>
+
+<!-- Hero Section -->
+<section class="hero">
+  <div>
+    <h1>Welcome to Campus Connect</h1>
+    <p>Your four years of engineering at one place</p>
+  </div>
+</section>
+
+<!-- Features -->
+<section class="features text-center" id="features">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-md-3">
+        <div class="card p-4">
+          <h4 id="classrooms">Classrooms</h4>
+          <p>Access notes, assignments, lecture slides, and recordings semester by semester.</p>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card p-4">
+          <h4 id="roadmaps">Roadmaps</h4>
+          <p>Structured learning paths for coding, engineering, projects, and placements.</p>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card p-4">
+          <h4 id="tutorials">Tutorials</h4>
+          <p>Step-by-step guides for programming languages and frameworks.</p>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card p-4">
+          <h4 id="practice">Practice</h4>
+          <p>Sharpen problem-solving skills with coding challenges and real-time feedback.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

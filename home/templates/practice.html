@@ -1,0 +1,124 @@
+
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CodePractice - Learn & Solve</title>
+  <link rel="stylesheet" href="{% static 'css/practice.css'%}" />
+</head>
+<body>
+  <!-- Background Slider -->
+  <div class="slider">
+    <div class="slide" style="background-image: url('https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg');"></div>
+    <div class="slide" style="background-image: url('https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg');"></div>
+    <div class="slide" style="background-image: url('https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg');"></div>
+    <div class="slide" style="background-image: url('https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg');"></div>
+    <div class="slide" style="background-image: url('https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg');"></div>
+  </div>
+
+  <!-- Main Content -->
+  <header class="glass">
+    <h1>Welcome to <span>CodePractice</span></h1>
+    <p>Solve coding problems across multiple languages and sharpen your skills.</p>
+  </header>
+
+  <!-- Stats -->
+  <section class="stats">
+    <div class="stat-card glass">
+      <h2>250+</h2>
+      <p>Problems</p>
+    </div>
+    <div class="stat-card glass">
+      <h2>5</h2>
+      <p>Languages</p>
+    </div>
+    <div class="stat-card glass">
+      <h2>24/7</h2>
+      <p>Practice</p>
+    </div>
+  </section>
+
+  <!-- Languages -->
+  <section class="languages">
+    <div class="lang-card glass">
+      <h3>Python</h3>
+      <p>Beginner to advanced problems with detailed statements & I/O.</p>
+      <button onclick="openModal('python')">Start Solving</button>
+    </div>
+    <div class="lang-card glass">
+      <h3>JavaScript</h3>
+      <p>Interactive coding challenges and JS-specific problems.</p>
+      <button onclick="openModal('javascript')">Start Solving</button>
+    </div>
+    <div class="lang-card glass">
+      <h3>C</h3>
+      <p>Low-level problems on arrays, pointers and algorithms.</p>
+      <button onclick="openModal('c')">Start Solving</button>
+    </div>
+    <div class="lang-card glass">
+      <h3>Java</h3>
+      <p>OOP & data-structures focused problems.</p>
+      <button onclick="openModal('java')">Start Solving</button>
+    </div>
+    <div class="lang-card glass">
+      <h3>C++</h3>
+      <p>Competitive programming style problems with STL topics.</p>
+      <button onclick="openModal('cpp')">Start Solving</button>
+    </div>
+  </section>
+
+  <!-- Modal -->
+  <div id="questionModal" class="modal" aria-hidden="true">
+    <div class="modal-content glass" role="dialog" aria-modal="true">
+      <span class="close" onclick="closeModal()" aria-label="Close">&times;</span>
+      <h2 id="modalTitle"></h2>
+
+      <!-- Search + Filter -->
+      <div class="controls">
+        <input type="text" id="searchBox" placeholder="Search problems (title/keyword)..." />
+        <select id="filterLevel">
+          <option value="all">All</option>
+          <option value="easy">Easy</option>
+          <option value="medium">Medium</option>
+          <option value="hard">Hard</option>
+        </select>
+      </div>
+
+      <!-- Problem List -->
+      <div id="listAndEditor" style="display:flex;gap:18px;flex-wrap:wrap">
+        <div style="flex:1;min-width:300px">
+          <ul id="questionList"></ul>
+        </div>
+
+        <!-- Editor / Details -->
+        <div style="flex:1;min-width:320px;">
+          <div id="detailCard" style="display:none;">
+            <h3 id="editorTitle"></h3>
+            <p id="problemDescription" style="white-space:pre-wrap"></p>
+            <p><strong>Sample Input:</strong></p>
+            <pre id="sampleInput"></pre>
+            <p><strong>Sample Output:</strong></p>
+            <pre id="sampleOutput"></pre>
+
+            <textarea id="codeEditor">// Write your solution here...</textarea>
+            <div style="display:flex;gap:8px;margin-top:8px;">
+              <button id="runBtn">Run Code (JS only)</button>
+              <button id="downloadBtn">Download Code</button>
+            </div>
+            <pre id="outputBox"></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Problems data (250 generated entries) -->
+  <script src="problems.js"></script>
+  <!-- Main script -->
+  <script src="{% static 'js/practice.js'%}"></script>
+</body>
+</html>

@@ -1,0 +1,118 @@
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Developer Roadmaps</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/roadmap.css'%}">
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Developer Roadmaps</h1>
+        </header>
+        
+        <div class="divider"></div>
+        
+        <h2 class="section-title">Programming Language Roadmaps</h2>
+        
+        <div class="roadmap-grid">
+            <!-- Java Roadmap -->
+            <div class="roadmap-card java">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="fab fa-java"></i>
+                    </div>
+                    <h3 class="card-title">Java</h3>
+                </div>
+                <div class="card-body">
+                    <p class="card-description">Master Java programming from basics to advanced concepts and enterprise development</p>
+                    <button class="card-button" onclick="showContent('java')">View Roadmap</button>
+                </div>
+            </div>
+            
+            <!-- Python Roadmap -->
+            <div class="roadmap-card python">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="fab fa-python"></i>
+                    </div>
+                    <h3 class="card-title">Python</h3>
+                </div>
+                <div class="card-body">
+                    <p class="card-description">Learn Python for web development, data science, machine learning, and automation</p>
+                    <button class="card-button" onclick="showContent('python')">View Roadmap</button>
+                </div>
+            </div>
+            
+            <!-- C++ Roadmap -->
+            <div class="roadmap-card cpp">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3 class="card-title">C++</h3>
+                </div>
+                <div class="card-body">
+                    <p class="card-description">Dive into C++ for system programming, game development, and high-performance applications</p>
+                    <button class="card-button" onclick="showContent('cpp')">View Roadmap</button>
+                </div>
+            </div>
+            
+            <!-- JavaScript Roadmap -->
+            <div class="roadmap-card javascript">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="fab fa-js-square"></i>
+                    </div>
+                    <h3 class="card-title">JavaScript</h3>
+                </div>
+                <div class="card-body">
+                    <p class="card-description">Become a JavaScript expert for frontend, backend, and full-stack development</p>
+                    <button class="card-button" onclick="showContent('javascript')">View Roadmap</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Content Panel -->
+        <div id="contentPanel" class="content-panel">
+            <div class="content-header">
+                <h2 id="contentTitle" class="content-title">Select a Language</h2>
+                <button class="close-button" onclick="hideContent()">Close</button>
+            </div>
+            <div id="contentBody" class="content-body">
+                <p>Select a programming language from above to view its roadmap</p>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div class="mobile-menu">
+            <div class="mobile-menu-buttons">
+                <button class="mobile-menu-button" onclick="showContent('java')">
+                    <i class="fab fa-java"></i>
+                    <span>Java</span>
+                </button>
+                <button class="mobile-menu-button" onclick="showContent('python')">
+                    <i class="fab fa-python"></i>
+                    <span>Python</span>
+                </button>
+                <button class="mobile-menu-button" onclick="showContent('cpp')">
+                    <i class="fas fa-code"></i>
+                    <span>C++</span>
+                </button>
+                <button class="mobile-menu-button" onclick="showContent('javascript')">
+                    <i class="fab fa-js-square"></i>
+                    <span>JS</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="{% static 'js/roadmap.js'%}"></script>
+</body>
+</html>

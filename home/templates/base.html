@@ -1,0 +1,62 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>{% block title %}Campus Connect{% endblock %}</title>
+
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Montserrat:wght@500;700&display=swap" rel="stylesheet"/>
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="{% static 'css/dashboard.css' %}"/>
+</head>
+<body>
+
+  <!-- Header/Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="#">Campus Connect</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto gap-3">
+          <li class="nav-item"><a class="nav-link" href="#classrooms">Classrooms</a></li>
+          <li class="nav-item"><a class="nav-link" href="#roadmaps">Roadmaps</a></li>
+          <li class="nav-item"><a class="nav-link" href="#tutorials">Tutorials</a></li>
+          <li class="nav-item"><a class="nav-link" href="#practice">Practice</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page-specific content -->
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container text-center">
+      <h5>Our Team</h5>
+      <p>
+        Shaqib | <a href="mailto:shaqib@email.com">Email</a> | <a href="https://linkedin.com">LinkedIn</a><br>
+        Shehzad Ali Shaikh | <a href="mailto:shehzad@email.com">Email</a> | <a href="https://linkedin.com">LinkedIn</a><br>
+        Kaif Barudgar | <a href="mailto:kaif@email.com">Email</a> | <a href="https://linkedin.com">LinkedIn</a><br>
+        Hussain Sitamouwala | <a href="mailto:hussain@email.com">Email</a> | <a href="https://linkedin.com">LinkedIn</a>
+      </p>
+      <p class="mt-3">&copy; 2025 Campus Connect. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS + Custom JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="{% static 'js/department-script.js' %}"></script>
+</body>
+</html>

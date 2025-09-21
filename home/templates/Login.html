@@ -1,0 +1,71 @@
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Campus Connect - Login</title>
+  
+  <!-- External CSS -->
+<link rel="stylesheet" href="{% static 'css/login-style.css'%}">
+</head>
+<body>
+  <div class="login-container">
+    <div class="login-card">
+      <h1 class="login-title">Campus Connect</h1>
+      <p class="login-subtitle">Please enter your details to continue</p>
+      
+      <form method="POST" action="" id="loginForm">
+        {% csrf_token %}
+        <!-- Email -->
+        <div class="form-group">
+          <label class="form-label">Email</label>
+          <input
+            type="email"
+            name="email"
+            id="email"
+            placeholder="Enter your email"
+            class="form-input"
+            required
+          />
+        </div>
+        
+        <!-- Password -->
+        <div class="form-group">
+          <label class="form-label">Password</label>
+          <input
+            type="password"
+            name="password"
+            id="password"
+            placeholder="Password"
+            class="form-input"
+            required
+          />
+        </div>
+        
+        <a href="#" class="forgot-password">Forgot password</a>
+        
+        <button type="submit" class="login-btn">
+          Login
+        </button>
+      </form>
+      
+      <!-- Google Sign-in Button -->
+      <button class="google-btn" id="googleSignIn">
+        <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google" class="google-icon" />
+        <span>Sign in with Google</span>
+      </button>
+      
+      <p class="signup-text">
+        Don't have an account?
+        <a href="#" class="signup-link">Sign up for free</a>
+      </p>
+    </div>
+  </div>
+
+  <!-- External JavaScript -->
+  <script src="{% static 'js/login-script.js' %}"></script>
+</body>
+</html>
