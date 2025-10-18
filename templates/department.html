@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Department Notes - Campus Connect{% endblock %}
+
+{% block extra_css %} 
+<link rel="stylesheet" href="{% static 'css/classroom.css' %}"/>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="header-section">
+        <h1>Classroom</h1>
+        <button type="button" class="upload-btn" onclick="redirectToUpload()">Upload Notes</button>
+    </div>    
+
+    <script>
+        function redirectToUpload() {
+            window.location.href = "{% url 'upload_page' %}";
+        }
+    </script>
+
+    <div class="filter-section">
+        <input type="text" class="search-input" id="searchInput" placeholder="Search notes, subjects, or professors...">
+        
+        <select class="filter-select" id="branchFilter" onchange="filterNotes()">
+            <option value="">All Branches</option>
+            <option value="COMPS">COMPS</option>
+            <option value="IT">IT</option>
+            <option value="AIDS">AIDS</option>
+            <option value="EXTC">EXTC</option>
+            <option value="ECS">ECS</option>
+            <option value="MECH">MECH</option>
+            <option value="CIVIL">CIVIL</option>
+        </select>
+
+        <select class="filter-select" id="subjectFilter" onchange="filterNotes()">
+            <option value="">All Subjects</option>
+            {% comment %} You can loop over subjects dynamically from backend if needed {% endcomment %}
+            <option value="Machine Learning">Machine Learning</option>
+            <option value="Mathematics">Mathematics</option>
+            <option value="Artificial Intelligence">Artificial Intelligence</option>
+            <option value="Data Structures">Data Structures</option>
+            <option value="DBMS">DBMS</option>
+            <option value="Computer Networks">Computer Networks</option>
+            <option value="Operating Systems">Operating Systems</option>
+            <option value="Web Development">Web Development</option>
+        </select>
+
+        <select class="filter-select" id="semesterFilter" onchange="filterNotes()">
+            <option value="">All Semesters</option>
+            <option value="Sem 1st">Sem 1st</option>
+            <option value="Sem 2nd">Sem 2nd</option>
+            <option value="Sem 3rd">Sem 3rd</option>
+            <option value="Sem 4th">Sem 4th</option>
+            <option value="Sem 5th">Sem 5th</option>
+            <option value="Sem 6th">Sem 6th</option>
+            <option value="Sem 7th">Sem 7th</option>
+            <option value="Sem 8th">Sem 8th</option>
+        </select>
+
+        <select class="filter-select" id="professorFilter" onchange="filterNotes()">
+            <option value="">All Professors</option>
+            {% comment %} Optionally loop over professors from backend {% endcomment %}
+            <option value="Dr. Sharma">Dr. Sharma</option>
+            <option value="Rahul Kumar">Rahul Kumar</option>
+            <option value="Dr. Mehta">Dr. Mehta</option>
+        </select>
+
+        <button class="reset-btn" onclick="resetFilters()">Reset All</button>
+    </div>
+
+    <div class="counter-section">
+        <span id="noteCounter">Showing {{ notes|length }} of {{ notes|length }} notes</span>
+    </div>
+
+    <div class="notes-grid" id="notesGrid">
+        {% for note in notes %}
+        <div class="note-card" data-branch="{{ note.branch }}" data-subject="{{ note.subject }}" data-semester="{{ note.semester }}" data-author="{{ note.name }}">
+            <div class="note-header">
+                <span class="note-category-icon">📄</span>
+                <span>{{ note.subject }}</span>
+            </div>
+            <div class="note-title">{{ note.title }}</div>
+            <div class="note-subtitle">{{ note.description }}</div>
+            <div class="note-meta">
+                <span class="badge {{ note.branch|lower }}">{{ note.branch }}</span>
+                <span>📅 {{ note.semester }}</span>
+                <span>👁️ {{ note.views }} views</span>
+            </div>
+            <div class="note-footer">
+                <div class="note-author">By: {{ note.name }}</div>
+                {% if note.driveLink %}
+                <div class="note-actions">
+                    <a href="{{ note.driveLink }}" target="_blank" class="view-btn">View</a>
+                    <a href="{{ note.driveLink }}" target="_blank" download class="download-btn">Download</a>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        {% empty %}
+        <p>No notes uploaded yet.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/classroom.js' %}"></script>
+<script>
+    // Pass Django notes into JS
+    const notesData = JSON.parse('{{ notes|safe|escapejs }}');
+</script>
+{% endblock %}

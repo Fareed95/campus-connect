@@ -1,0 +1,141 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Notes - Campus Connect</title>
+    <link rel="stylesheet" href="{% static 'css/uploader.css' %}">
+</head>
+<body>
+    <div class="container">
+        <div class="upload-card">
+            <div class="card-header">
+                <a href="{% url 'dashboard' %}">
+                    <h1>Campus Connect</h1>
+                </a>
+                <p>Upload your notes to share with others</p>
+            </div>
+
+            <div class="message" id="messageBox"></div>
+
+            <form id="uploadForm" class="upload-form" method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="name">Your Name</label>
+                    <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email ID</label>
+                    <input type="email" id="email" name="email" placeholder="Enter your email address" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="semester">Select Semester</label>
+                    <select id="semester" name="semester" required>
+                        <option value="">Choose Semester</option>
+                        <option value="Sem 1st">Semester 1</option>
+                        <option value="Sem 2nd">Semester 2</option>
+                        <option value="Sem 3rd">Semester 3</option>
+                        <option value="Sem 4th">Semester 4</option>
+                        <option value="Sem 5th">Semester 5</option>
+                        <option value="Sem 6th">Semester 6</option>
+                        <option value="Sem 7th">Semester 7</option>
+                        <option value="Sem 8th">Semester 8</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="branch">Select Branch</label>
+                    <select id="branch" name="branch" required>
+                        <option value="">Choose Branch</option>
+                        <option value="COMPS">Computer Engineering</option>
+                        <option value="AIDS">AI & Data Science</option>
+                        <option value="ECS">Electronics & Computer Science</option>
+                        <option value="MECH">Mechanical Engineering</option>
+                        <option value="CIVIL">Civil Engineering</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="contentType">Content Type</label>
+                    <select id="contentType" name="contentType" required>
+                        <option value="">Choose Type</option>
+                        <option value="subject">Subject Notes</option>
+                        <option value="assignment">Assignment</option>
+                        <option value="experiment">Experiment</option>
+                    </select>
+                </div>
+
+                <div class="form-group" id="subjectField" style="display: none;">
+                    <label for="subject">Select Subject</label>
+                    <select id="subject" name="subject">
+                        <option value="">Choose Subject</option>
+                        <option value="Machine Learning">Machine Learning</option>
+                        <option value="Mathematics">Mathematics</option>
+                        <option value="Artificial Intelligence">Artificial Intelligence</option>
+                        <option value="Data Structures">Data Structures</option>
+                        <option value="DBMS">DBMS</option>
+                        <option value="Computer Networks">Computer Networks</option>
+                        <option value="Operating Systems">Operating Systems</option>
+                        <option value="Web Development">Web Development</option>
+                        <option value="Engineering Graphics">Engineering Graphics</option>
+                        <option value="Data Science">Data Science</option>
+                        <option value="Software Engineering">Software Engineering</option>
+                        <option value="Computer Architecture">Computer Architecture</option>
+                        <option value="Theory of Computation">Theory of Computation</option>
+                        <option value="Digital Electronics">Digital Electronics</option>
+                        <option value="Microprocessors">Microprocessors</option>
+                        <option value="Cloud Computing">Cloud Computing</option>
+                        <option value="Cyber Security">Cyber Security</option>
+                    </select>
+                </div>
+
+                <div class="form-group" id="moduleNameField" style="display: none;">
+                    <label for="moduleName" id="moduleLabel">Module Name</label>
+                    <input type="text" id="moduleName" name="moduleName" placeholder="Enter module name">
+                </div>
+
+                <div class="form-group">
+                    <label for="title">Title</label>
+                    <input type="text" id="title" name="title" placeholder="Enter note title" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="description">Description (Optional)</label>
+                    <textarea id="description" name="description" placeholder="Brief description of the content" rows="3"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="driveLink">Google Drive Link</label>
+                    <input type="url" id="driveLink" name="driveLink" placeholder="Paste Google Drive shareable link" required>
+                    <small class="help-text">Make sure the link is set to "Anyone with the link can view"</small>
+                </div>
+
+                <button type="submit" class="submit-btn">Upload Notes</button>
+                <button type="button" class="cancel-btn" onclick="goBack()">Cancel</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const contentType = document.getElementById("contentType");
+            const subjectField = document.getElementById("subjectField");
+
+            if (contentType && subjectField) {
+                contentType.addEventListener("change", function() {
+                    if (this.value === "subject") {
+                        subjectField.style.display = "block";
+                    } else {
+                        subjectField.style.display = "none";
+                    }
+                });
+            }
+        });
+    </script>
+
+    <script src="{% static 'js/uploading.js' %}"></script>
+</body>
+</html>

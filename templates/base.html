@@ -15,38 +15,48 @@
 
   <!-- Custom CSS -->
   <link rel="stylesheet" href="{% static 'css/dashboard.css' %}"/>
+    {% block extra_css %} 
+
+      {% endblock %}
 </head>
 <body>
-
+  <header
   <!-- Header/Navbar -->
   <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
     <div class="container">
-      <a class="navbar-brand" href="#">Campus Connect</a>
+      <a class="navbar-brand" href="{% url 'dashboard' %}">Campus Connect</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto gap-3">
-          <li class="nav-item"><a class="nav-link" href="#classrooms">Classrooms</a></li>
-          <li class="nav-item"><a class="nav-link" href="#roadmaps">Roadmaps</a></li>
-          <li class="nav-item"><a class="nav-link" href="#tutorials">Tutorials</a></li>
-          <li class="nav-item"><a class="nav-link" href="#practice">Practice</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'department' %}">Classrooms</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'roadmap' %}">Roadmaps</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'tutorial' %}">Tutorials</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'practice' %}">Practice</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'account_logout' %}">Logout</a></li>
+          
         </ul>
       </div>
     </div>
   </nav>
+</header>
 
+
+
+  
   <!-- Page-specific content -->
-  <main>
+ 
+     
     {% block content %}{% endblock %}
-  </main>
+ 
 
   <!-- Footer -->
   <footer>
     <div class="container text-center">
       <h5>Our Team</h5>
       <p>
-        Shaqib | <a href="mailto:shaqib@email.com">Email</a> | <a href="https://linkedin.com">LinkedIn</a><br>
+        Shaqib Qureshi | <a href="mailto:qureshishaqib4@email.com">Email</a> | <a href="www.linkedin.com/in/shaqib-qureshi">LinkedIn</a><br>
         Shehzad Ali Shaikh | <a href="mailto:shehzad@email.com">Email</a> | <a href="https://linkedin.com">LinkedIn</a><br>
         Kaif Barudgar | <a href="mailto:kaif@email.com">Email</a> | <a href="https://linkedin.com">LinkedIn</a><br>
         Hussain Sitamouwala | <a href="mailto:hussain@email.com">Email</a> | <a href="https://linkedin.com">LinkedIn</a>
@@ -57,6 +67,11 @@
 
   <!-- Bootstrap JS + Custom JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="{% static 'js/department-script.js' %}"></script>
+  <script src="{% static 'js/dashboard-script.js' %}"></script>
+
+{% block extra_js%}
+
+{% endblock %}
+
 </body>
 </html>

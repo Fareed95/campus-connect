@@ -1,0 +1,1152 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+
+    {% block title %} Programming Docs {% endblock %}
+    {% block extra_css %}
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+    <link rel="stylesheet" href="{% static 'css/tutorial.css' %}"/>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            200: '#bfdbfe',
+                            300: '#93c5fd',
+                            400: '#60a5fa',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    {% endblock %}
+
+    {% block content %}
+
+    <div class="flex relative">
+         <!-- Sidebar for desktop -->
+        <aside class="w-72 bg-white min-h-screen shadow-md p-6 overflow-y-auto sidebar-scroll hidden md:block">
+            <h2 class="text-lg font-semibold mb-4 text-gray-700 border-b pb-2">Languages</h2>
+            <ul class="space-y-2 text-gray-700">
+                <!-- Java -->
+                <li class="rounded-lg overflow-hidden">
+                    <button class="w-full text-left font-medium hover:bg-primary-50 p-3 rounded-lg flex justify-between items-center" onclick="toggleMenu('javaMenu')">
+                        <span><i class="fab fa-java text-orange-500 mr-2"></i> Java</span>
+                        <i class="fas fa-chevron-down text-xs transition-transform" id="javaMenuIcon"></i>
+                    </button>
+                    <ul class="ml-4 mt-1 hidden space-y-1 text-sm" id="javaMenu">
+                        <li><a href="#" class="block py-2 px-4 rounded hover:bg-primary-50 text-gray-600 hover:text-primary-600" onclick="showContent('javaIntro'); return false;">Introduction</a></li>
+                        <li><a href="#" class="block py-2 px-4 rounded hover:bg-primary-50 text-gray-600 hover:text-primary-600" onclick="showContent('javaOOP'); return false;">OOP Concepts</a></li>
+                        <li><a href="#" class="block py-2 px-4 rounded hover:bg-primary-50 text-gray-600 hover:text-primary-600" onclick="showContent('javaComments'); return false;">Comments</a></li>
+                    </ul>
+                </li>
+                
+                <!-- Python -->
+                <li class="rounded-lg overflow-hidden">
+                    <button class="w-full text-left font-medium hover:bg-primary-50 p-3 rounded-lg flex justify-between items-center" onclick="toggleMenu('pythonMenu')">
+                        <span><i class="fab fa-python text-blue-500 mr-2"></i> Python</span>
+                        <i class="fas fa-chevron-down text-xs transition-transform" id="pythonMenuIcon"></i>
+                    </button>
+                    <ul class="ml-4 mt-1 hidden space-y-1 text-sm" id="pythonMenu">
+                        <li><a href="#" class="block py-2 px-4 rounded hover:bg-primary-50 text-gray-600 hover:text-primary-600" onclick="showContent('pythonIntro'); return false;">Introduction</a></li>
+                        <li><a href="#" class="block py-2 px-4 rounded hover:bg-primary-50 text-gray-600 hover:text-primary-600" onclick="showContent('pythonInstallation'); return false;">Installation</a></li>
+                        <li><a href="#" class="block py-2 px-4 rounded hover:bg-primary-50 text-gray-600 hover:text-primary-600" onclick="showContent('pythonFunctions'); return false;">Functions</a></li>                       
+                    </ul>
+                </li>
+                
+                <!-- C++ -->
+                <li class="rounded-lg overflow-hidden">
+                    <button class="w-full text-left font-medium hover:bg-primary-50 p-3 rounded-lg flex justify-between items-center" onclick="toggleMenu('cppMenu')">
+                        <span><i class="fas fa-file-code text-blue-700 mr-2"></i> C++</span>
+                        <i class="fas fa-chevron-down text-xs transition-transform" id="cppMenuIcon"></i>
+                    </button>
+                    <ul class="ml-4 mt-1 hidden space-y-1 text-sm" id="cppMenu">
+                        <li><a href="#" class="block py-2 px-4 rounded hover:bg-primary-50 text-gray-600 hover:text-primary-600" onclick="showContent('cppIntro'); return false;">Introduction</a></li>
+                        <li><a href="#" class="block py-2 px-4 rounded hover:bg-primary-50 text-gray-600 hover:text-primary-600" onclick="showContent('cppInstallation'); return false;">Installation</a></li>
+                        <li><a href="#" class="block py-2 px-4 rounded hover:bg-primary-50 text-gray-600 hover:text-primary-600" onclick="showContent('cppVariables'); return false;">Variables</a></li>
+                    </ul>
+                </li>
+                
+                <!-- JavaScript -->
+                <li class="rounded-lg overflow-hidden">
+                    <button class="w-full text-left font-medium hover:bg-primary-50 p-3 rounded-lg flex justify-between items-center" onclick="toggleMenu('jsMenu')">
+                        <span><i class="fab fa-js-square text-yellow-400 mr-2"></i> JavaScript</span>
+                        <i class="fas fa-chevron-down text-xs transition-transform" id="jsMenuIcon"></i>
+                    </button>
+                    <ul class="ml-4 mt-1 hidden space-y-1 text-sm" id="jsMenu">
+                        <li><a href="#" class="block py-2 px-4 rounded hover:bg-primary-50 text-gray-600 hover:text-primary-600" onclick="showContent('jsIntro'); return false;">Introduction</a></li>
+                        <li><a href="#" class="block py-2 px-4 rounded hover:bg-primary-50 text-gray-600 hover:text-primary-600" onclick="showContent('jsExecution'); return false;">JsExecution</a></li>
+                        <li><a href="#" class="bloxk py-2 px-4 rounded hover:bg-primary-50 text-gray-600 hover:text-primary-600" onclick="showContent('jsNodeInstallation'); return false;">Node.js Installation</a></li>                     
+                    </ul>
+                </li>
+            </ul>
+        </aside>
+
+        <!-- Mobile sidebar -->
+        <div class="backdrop fixed inset-0 bg-black bg-opacity-50 z-30 md:hidden" id="backdrop"></div>
+        <aside class="mobile-menu fixed top-0 left-0 h-full w-72 bg-white shadow-lg z-40 md:hidden overflow-y-auto sidebar-scroll" id="mobileSidebar">
+            <div class="p-4 border-b flex justify-between items-center">
+                <h2 class="text-lg font-semibold text-gray-700">Menu</h2>
+                <button id="closeMobileMenu" class="text-gray-500">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+            <div class="p-4">
+                <h3 class="text-md font-medium mb-3 text-gray-700 border-b pb-2">Languages</h3>
+                <ul class="space-y-2 text-gray-700">
+                    <!-- Java Mobile -->
+                    <li class="rounded-lg overflow-hidden">
+                        <button class="w-full text-left font-medium hover:bg-primary-50 p-3 rounded-lg flex justify-between items-center" onclick="toggleMenu('javaMenuMobile')">
+                            <span><i class="fab fa-java text-orange-500 mr-2"></i> Java</span>
+                            <i class="fas fa-chevron-down text-xs transition-transform" id="javaMenuMobileIcon"></i>
+                        </button>
+                        <ul class="ml-4 mt-1 hidden space-y-1 text-sm" id="javaMenuMobile">
+                            <li><a href="#" class="block py-2 px-4 rounded hover:bg-primary-50 text-gray-600 hover:text-primary-600" onclick="showContent('javaIntro'); closeMobileMenu(); return false;">Introduction</a></li>
+                            <li><a href="#" class="block py-2 px-4 rounded hover:bg-primary-50 text-gray-600 hover:text-primary-600" onclick="showContent('javaOOP'); closeMobileMenu(); return false;">OOP Concepts</a></li>
+                            <li><a href="#" class="block py-2 px-4 rounded hover:bg-primary-50 text-gray-600 hover:text-primary-600" onclick="showContent('javaComments'); closeMobileMenu(); return false;">Comments</a></li>                           
+                        </ul>
+                    </li>
+                    
+                    <!-- Python Mobile -->
+                    <li class="rounded-lg overflow-hidden">
+                        <button class="w-full text-left font-medium hover:bg-primary-50 p-3 rounded-lg flex justify-between items-center" onclick="toggleMenu('pythonMenuMobile')">
+                            <span><i class="fab fa-python text-blue-500 mr-2"></i> Python</span>
+                            <i class="fas fa-chevron-down text-xs transition-transform" id="pythonMenuMobileIcon"></i>
+                        </button>
+                        <ul class="ml-4 mt-1 hidden space-y-1 text-sm" id="pythonMenuMobile">
+                            <li><a href="#" class="block py-2 px-4 rounded hover:bg-primary-50 text-gray-600 hover:text-primary-600" onclick="showContent('pythonIntro'); closeMobileMenu(); return false;">Introduction</a></li>
+                            <li><a href="#" class="block py-2 px-4 rounded hover:bg-primary-50 text-gray-600 hover:text-primary-600" onclick="showContent('pythonInstallation'); closeMobileMenu(); return false;">Installation</a></li>
+                            <li><a href="#" class="block py-2 px-4 rounded hover:bg-primary-50 text-gray-600 hover:text-primary-600" onclick="showContent('pythonFunctions'); closeMobileMenu(); return false;">Functions</a></li>                          
+                        </ul>
+                    </li>
+                    
+                    <!-- C++ Mobile -->
+                    <li class="rounded-lg overflow-hidden">
+                        <button class="w-full text-left font-medium hover:bg-primary-50 p-3 rounded-lg flex justify-between items-center" onclick="toggleMenu('cppMenuMobile')">
+                            <span><i class="fas fa-file-code text-blue-700 mr-2"></i> C++</span>
+                            <i class="fas fa-chevron-down text-xs transition-transform" id="cppMenuMobileIcon"></i>
+                        </button>
+                        <ul class="ml-4 mt-1 hidden space-y-1 text-sm" id="cppMenuMobile">
+                            <li><a href="#" class="block py-2 px-4 rounded hover:bg-primary-50 text-gray-600 hover:text-primary-600" onclick="showContent('cppIntro'); closeMobileMenu(); return false;">Introduction</a></li>
+                            <li><a href="#" class="block py-2 px-4 rounded hover:bg-primary-50 text-gray-600 hover:text-primary-600" onclick="showContent('cppInstallation'); closeMobileMenu(); return false;">Installation</a></li>
+                            <li><a href="#" class="block py-2 px-4 rounded hover:bg-primary-50 text-gray-600 hover:text-primary-600" onclick="showContent('cppVariables'); closeMobileMenu(); return false;">Variables</a></li>
+                        </ul>
+                    </li>
+                    
+                    <!-- JavaScript Mobile -->
+                    <li class="rounded-lg overflow-hidden">
+                        <button class="w-full text-left font-medium hover:bg-primary-50 p-3 rounded-lg flex justify-between items-center" onclick="toggleMenu('jsMenuMobile')">
+                            <span><i class="fab fa-js-square text-yellow-400 mr-2"></i> JavaScript</span>
+                            <i class="fas fa-chevron-down text-xs transition-transform" id="jsMenuMobileIcon"></i>
+                        </button>
+                        <ul class="ml-4 mt-1 hidden space-y-1 text-sm" id="jsMenuMobile">
+                            <li><a href="#" class="block py-2 px-4 rounded hover:bg-primary-50 text-gray-600 hover:text-primary-600" onclick="showContent('jsIntro'); closeMobileMenu(); return false;">Introduction</a></li>
+                            <li><a href="#" class="block py-2 px-4 rounded hover:bg-primary-50 text-gray-600 hover:text-primary-600" onclick="showContent('jsExecution'); closeMobileMenu();return false;">JsExecution</a></li>
+                             <li><a href="#" class="block py-2 px-4 rounded hover:bg-primary-50 text-gray-600 hover:text-primary-600" onclick="showContent('jsNodeInstallation'); closeMObileMenu();return false;">Node.js Installation</a></li>                         
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1 p-6 md:p-8">
+            <div class="max-w-4xl mx-auto">
+                <!-- Default Content -->
+                <div id="defaultContent">
+                    <div class="bg-white rounded-xl shadow-sm p-8 text-center">
+                        <div class="w-24 h-24 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                            <i class="fas fa-code text-primary-600 text-4xl"></i>
+                        </div>
+                        <h1 class="text-3xl font-bold text-gray-800 mb-4">Welcome to Programming Docs</h1>
+                        <p class="text-gray-600 mb-6 max-w-md mx-auto">
+                            Select a language and topic from the sidebar to begin exploring tutorials, explanations, and resources.
+                        </p>
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
+                            <div class="bg-primary-50 rounded-lg p-4 text-center">
+                                <i class="fab fa-java text-orange-500 text-2xl mb-2"></i>
+                                <p class="text-sm font-medium">Java</p>
+                            </div>
+                            <div class="bg-primary-50 rounded-lg p-4 text-center">
+                                <i class="fab fa-python text-blue-500 text-2xl mb-2"></i>
+                                <p class="text-sm font-medium">Python</p>
+                            </div>
+                            <div class="bg-primary-50 rounded-lg p-4 text-center">
+                                <i class="fas fa-file-code text-blue-700 text-2xl mb-2"></i>
+                                <p class="text-sm font-medium">C++</p>
+                            </div>
+                            <div class="bg-primary-50 rounded-lg p-4 text-center">
+                                <i class="fab fa-js-square text-yellow-400 text-2xl mb-2"></i>
+                                <p class="text-sm font-medium">JavaScript</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+<!-- Java Introduction Content -->
+                <div class="hidden bg-white rounded-xl shadow-sm p-6" id="javaIntro">
+                    <div class="flex gap-2 mb-6">
+                        <button class="bg-gray-100 px-4 py-2 rounded-lg hover:bg-gray-200 text-gray-700 flex items-center" onclick="showContent('defaultContent')">
+                            <i class="fas fa-home mr-2"></i> Home
+                        </button>
+                    </div>
+                    <h1 class="text-3xl font-bold text-gray-800 mb-6">Java Overview</h1>
+                    <p class="text-gray-700 mb-4">Java is an open-source, class-based, high-level, object-oriented programming language. Java is platform independent as the Java programs are compiled into byte code that is platform independent.</p>
+                    <h2 class="text-2xl font-semibold mt-6 mb-2">History</h2>
+                    <p class="text-gray-700 mb-2">Java programming language was created by James Gosling in 1995. The original idea was to design a language for the television industry. Gosling worked along with his team also called the Green Team and the project they worked on was called Greentalk. This project was later named as OAK. The name OAK has its roots in the oak tree that stood outside Gosling's office. This name had to be dropped later as it was already a trademark by Oak Technologies.</p>
+                    <p class="text-gray-700 mb-2">Since the language could no longer be named OAK, Gosling and his team had to come up with a new name. The team considered various names like DNA, RUBY, JAVA, jolt, dynamic, revolutionary, SILK.</p>
+                    <p class="text-gray-700 mb-4">But the name had to be unique and quite easy to say. The name JAVA occurred in Gosling's mind while having a cup of coffee at his office.</p>
+                    <h2 class="text-2xl font-semibold mt-6 mb-2">Types of Java Applications</h2>
+                    <ul class="list-disc list-inside text-gray-700 space-y-2">
+                        <li><strong>Web Application:</strong> Web applications are the applications that run on web browsers using servlet, JSP, struts technologies. These technologies create Java web applications and deploy them on servers.</li>
+                        <li><strong>Mobile Application:</strong> These are mobile applications created using Java.</li>
+                        <li><strong>Standalone Application:</strong> Standalone applications are executed by themselves without the need for other programs and files. An example of such an application is antivirus software.</li>
+                        <li><strong>Enterprise Application:</strong> Some applications are designed for corporate organizations with the intent to control major processes in real time. Such applications are called enterprise applications.</li>
+                    </ul>
+                    <h2 class="text-2xl font-semibold mt-6 mb-2">Features of Java</h2>
+                    <ul class="list-disc list-inside text-gray-700 space-y-2">
+                        <li><strong>Object Oriented:</strong> In object-oriented programming, everything is an object rather than functions and logic.</li>
+                        <li><strong>Simple:</strong> Java is simple to understand, easy to learn, and implement.</li>
+                        <li><strong>Secured:</strong> It is possible to design secured software systems using Java.</li>
+                        <li><strong>Platform Independent:</strong> Java is a write-once, run-anywhere language, meaning once the code is written, it can be executed on any software and hardware systems.</li>
+                        <li><strong>Portable:</strong> Java is not necessarily fixated on a single hardware machine. Once created, Java code can be used on any platform.</li>
+                        <li><strong>Architecture Neutral:</strong> Java is architecture neutral meaning the size of primitive types is fixed and does not vary depending upon the type of architecture.</li>
+                        <li><strong>Robust:</strong> Java emphasizes a lot on error handling, type checking, memory management, etc. This makes it a robust language.</li>
+                        <li><strong>Interpreted:</strong> Java converts high-level program statements into Assembly Level Language, thus making it interpreted.</li>
+                        <li><strong>Distributed:</strong> Java lets us create distributed applications that can run on multiple computers simultaneously.</li>
+                        <li><strong>Dynamic:</strong> Java is designed to adapt to ever-evolving systems thus making it dynamic.</li>
+                        <li><strong>Multi-thread:</strong> Multi-threading is an important feature provided by Java for creating web applications.</li>
+                        <li><strong>High-performance:</strong> Java uses a Just-In-Time compiler thus giving us high performance.</li>
+                    </ul>
+
+                </div>
+  <div class="hidden bg-white rounded-xl shadow-sm p-6" id="javaOOP">
+                    <div class="flex gap-2 mb-6">
+                        <button class="bg-gray-100 px-4 py-2 rounded-lg hover:bg-gray-200 text-gray-700 flex items-center" onclick="showContent('javaIntro')">
+                            <i class="fas fa-arrow-left mr-2"></i> Back to Intro
+                        </button>
+                        <button class="bg-gray-100 px-4 py-2 rounded-lg hover:bg-gray-200 text-gray-700 flex items-center" onclick="showContent('defaultContent')">
+                            <i class="fas fa-home mr-2"></i> Home
+                        </button>
+                    </div>
+                    <h1 class="text-3xl font-bold text-gray-800 mb-6">Java OOP Concepts</h1>
+                    <p class="text-gray-700 mb-4">
+                        Object & Class — OOP (Object Oriented Programming) is a concept of using objects in programming to implement real-world entities.
+                        OOP provides a clear syntax for our code making it easier to execute the code.
+                        The key concepts in OOP include: <strong>Object & Class</strong>, <strong>Inheritance</strong>, <strong>Polymorphism</strong>, <strong>Abstraction</strong>, <strong>Encapsulation</strong>.
+                    </p>
+                    <h2 class="text-2xl font-semibold mt-6 mb-2">Object &amp; Class</h2>
+<p class="text-gray-700 mb-4">
+          An object can be any real-world entity such as a book, cupboard, pen, paper, fan, etc.
+          While a class is a group of objects with similar properties. An object is an instance of a class while a class is a blueprint from which we create objects.
+        </p>
+<h3 class="text-xl font-semibold mt-6 mb-2">Different ways to create objects</h3>
+<p class="text-gray-700 mb-2">Syntax to create object from class:</p>
+<pre class="bg-gray-900 text-green-400 font-mono text-sm p-4 rounded-lg overflow-x-auto"><code>className objectName = new className();</code></pre>
+<h3 class="text-xl font-semibold mt-6 mb-2">Example 1</h3>
+<pre class="bg-gray-900 text-green-400 font-mono text-sm p-4 rounded-lg overflow-x-auto"><code>public class Example1 {
+  String name = "Rajesh";
+  int age = 20;
+  public static void main(String[] args) {
+    Example1 ex = new Example1();
+    System.out.println("Name: " + ex.name);
+    System.out.println("Age: " + ex.age);
+  }
+}</code></pre>
+<p class="font-semibold mt-2">Output:</p>
+<pre class="bg-gray-800 text-gray-100 font-mono text-sm p-4 rounded-lg overflow-x-auto"><code>Name: Rajesh
+Age: 20</code></pre>
+<p class="text-gray-700 mt-6 mb-4">
+          In the above example, first we create a class using the <code class="bg-gray-200 px-1 rounded">class</code> keyword. We have named our class <code class="bg-gray-200 px-1 rounded">Example1</code>.
+          Now in order to create an object from Example1 class we use the <code class="bg-gray-200 px-1 rounded">new</code> keyword.
+          The <code class="bg-gray-200 px-1 rounded">new</code> keyword allocates heap memory to the object at runtime.
+        </p>
+<h3 class="text-xl font-semibold mt-6 mb-2">Example 2 (Multiple Instances)</h3>
+<pre class="bg-gray-900 text-green-400 font-mono text-sm p-4 rounded-lg overflow-x-auto"><code>public class Example2 {
+  String name = "Rajesh";
+  int age = 20;
+  public static void main(String[] args) {
+    Example1 ex1 = new Example1();
+    Example2 ex2 = new Example2();
+    System.out.println("Name: " + ex1.name);
+    System.out.println("Age: " + ex2.age);
+  }
+}</code></pre>
+<p class="font-semibold mt-2">Output:</p>
+<pre class="bg-gray-800 text-gray-100 font-mono text-sm p-4 rounded-lg overflow-x-auto"><code>Name: Rajesh
+Age: 20</code></pre>
+<p class="text-gray-700 mt-6 mb-4">
+          This example is similar to the previous example, i.e., we get the same output. The difference is that in this example, we created two instances of classes.
+        </p>
+<h3 class="text-xl font-semibold mt-6 mb-2">Example 3 &amp; 4 (Code in one class, used in another)</h3>
+<pre class="bg-gray-900 text-green-400 font-mono text-sm p-4 rounded-lg overflow-x-auto"><code>// Example3.java
+public class Example3 {
+  String name = "Rajesh";
+  int age = 20;
+}
+
+// Example4.java
+public class Example4 {
+  public static void main(String[] args) {
+    Example3 ex3 = new Example3();
+    System.out.println("Name: " + ex3.name);
+    System.out.println("Age: " + ex3.age);
+  }
+}</code></pre>
+<p class="font-semibold mt-2">Output:</p>
+<pre class="bg-gray-800 text-gray-100 font-mono text-sm p-4 rounded-lg overflow-x-auto"><code>Name: Rajesh
+Age: 20</code></pre>
+<h2 class="text-2xl font-semibold mt-8 mb-2">Class attributes/fields</h2>
+<p class="text-gray-700 mb-4">
+          Class attributes are the variables created inside a class.
+        </p>
+<pre class="bg-gray-900 text-green-400 font-mono text-sm p-4 rounded-lg overflow-x-auto"><code>public class Example3 {
+  String name = "Rajesh";
+  int age = 20;
+}</code></pre>
+<p class="text-gray-700 mt-4 mb-2">We can access attributes by creating an object:</p>
+<pre class="bg-gray-900 text-green-400 font-mono text-sm p-4 rounded-lg overflow-x-auto"><code>public class Example1 {
+  String name = "Rajesh";
+  int age = 20;
+  public static void main(String[] args) {
+    Example1 ex = new Example1();
+    System.out.println("Name: " + ex.name);
+    System.out.println("Age: " + ex.age);
+  }
+}</code></pre>
+<p class="text-gray-700 mt-4 mb-2">Attributes declared in the class can be overridden in <code class="bg-gray-200 px-1 rounded">main()</code>:</p>
+<pre class="bg-gray-900 text-green-400 font-mono text-sm p-4 rounded-lg overflow-x-auto"><code>public class Example1 {
+  String name = "Rajesh";
+  int age = 20;
+  public static void main(String[] args) {
+    Example1 ex = new Example1();
+    ex.age = 25;
+    System.out.println("Name: " + ex.name);
+    System.out.println("Age: " + ex.age);
+  }
+}</code></pre>
+<p class="font-semibold mt-2">Output:</p>
+<pre class="bg-gray-800 text-gray-100 font-mono text-sm p-4 rounded-lg overflow-x-auto"><code>Name: Rajesh
+Age: 25</code></pre>
+<p class="text-gray-700 mt-6 mb-2">
+          But if we don't want the value to be changed, we can use the <code class="bg-gray-200 px-1 rounded">final</code> keyword.
+        </p>
+<pre class="bg-gray-900 text-green-400 font-mono text-sm p-4 rounded-lg overflow-x-auto"><code>public class Example1 {
+  final String name = "Rajesh";
+  final int age = 20;
+  public static void main(String[] args) {
+    Example1 ex = new Example1();
+    ex.name = "Sanjay";
+    ex.age = 25;
+    System.out.println("Name: " + ex.name);
+    System.out.println("Age: " + ex.age);
+  }
+}</code></pre>
+<p class="font-semibold mt-2">Output:</p>
+<pre class="bg-gray-800 text-gray-100 font-mono text-sm p-4 rounded-lg overflow-x-auto"><code>Exception in thread "main" java.lang.Error: Unresolved compilation problems:
+  The final field Example1.name cannot be assigned
+  The final field Example1.age cannot be assigned
+  at javaFiles/ObjectNClass.Example1.main(Example1.java:10)</code></pre>
+<h2 class="text-2xl font-semibold mt-8 mb-2">Class Methods</h2>
+<p class="text-gray-700 mb-4">
+          Methods are blocks of code that accept parameters and perform actions when called. Public methods are accessed by creating objects of the class whereas static methods can be called directly without objects.
+        </p>
+<h3 class="text-xl font-semibold mt-2 mb-2">Example 5</h3>
+<pre class="bg-gray-900 text-green-400 font-mono text-sm p-4 rounded-lg overflow-x-auto"><code>public class Example5 {
+  // public method
+  public void fruits() {
+    String fruits[] = {"Apple", "Banana", "Mango", "Strawberry"};
+    System.out.println("Fruits:");
+    for (int i = 0; i &lt; fruits.length; i++) {
+      System.out.println(fruits[i]);
+    }
+  }
+
+  // static method
+  static void vegetables() {
+    String vegies[] = {"Onion", "Potato", "Carrot", "Raddish"};
+    System.out.println("Vegetables:");
+    for (int i = 0; i &lt; vegies.length; i++) {
+      System.out.println(vegies[i]);
+    }
+  }
+
+  public static void main(String[] args) {
+    Example5 ex5 = new Example5(); // need to create object for public method
+    ex5.fruits();
+    System.out.println();
+    vegetables(); // static method called directly
+  }
+}</code></pre>
+<p class="font-semibold mt-2">Output:</p>
+<pre class="bg-gray-800 text-gray-100 font-mono text-sm p-4 rounded-lg overflow-x-auto"><code>Fruits:
+Apple
+Banana
+Mango
+Strawberry
+
+Vegetables:
+Onion
+Potato
+Carrot
+Raddish</code></pre>
+<h2 class="text-2xl font-semibold mt-8 mb-2">Inheritance</h2>
+<p class="text-gray-700 mb-4">
+          Inheritance is the mechanism by which one class acquires the properties and features of another class.
+          The class that inherits the properties is called a <strong>sub-class (child class)</strong> while the class from which the property is inherited is called the <strong>super-class (parent class)</strong>.
+        </p>
+<p class="text-gray-700 mb-4">
+          A child class inherits properties of the parent class with the help of the <code class="bg-gray-200 px-1 rounded">extends</code> keyword.
+        </p>
+<pre class="bg-gray-900 text-green-400 font-mono text-sm p-4 rounded-lg overflow-x-auto"><code>class childClass extends parentClass {
+    // any code
+}</code></pre>
+<p class="text-gray-700 mt-4 mb-2">
+          Inheritance can be further divided into the following types:
+        </p>
+<ul class="list-disc ml-6 text-gray-700 space-y-1">
+<li>Single level</li>
+<li>Multi-level</li>
+<li>Hierarchical</li>
+<li>Multiple</li>
+<li>Hybrid</li>
+</ul>
+<p class="text-gray-700 mt-2 mb-4">
+          Multiple and hybrid inheritance is not directly supported in Java, instead, it is achieved through the use of interfaces in Java.
+        </p>
+<h3 class="text-xl font-semibold mt-6 mb-2">i. Single Inheritance</h3>
+<p class="text-gray-700 mb-4">
+          When a single class inherits the attributes and methods of another class, it is known as single inheritance.
+        </p>
+<pre class="bg-gray-900 text-green-400 font-mono text-sm p-4 rounded-lg overflow-x-auto"><code>class FundamentalForce {
+    void Force() {
+        System.out.println("There are four fundamental forces.");
+    }
+}
+ 
+class Gravitational extends FundamentalForce {
+    void Gravity() {
+        System.out.println("Fruits fall to the ground due to gravitational Force.");
+    }
+}
+ 
+class SingleInheritance {
+    public static void main(String[] args) {
+        Gravitational G = new Gravitational();
+        G.Force();
+        G.Gravity();
+    }
+}</code></pre>
+<p class="font-semibold mt-2">Output:</p>
+<pre class="bg-gray-800 text-gray-100 font-mono text-sm p-4 rounded-lg overflow-x-auto"><code>There are four fundamental forces.
+Fruits fall to the ground due to gravitational Force.</code></pre>
+<h3 class="text-xl font-semibold mt-6 mb-2">ii. Multi-level Inheritance</h3>
+<p class="text-gray-700 mb-4">
+          When a class 3 inherits attributes and methods from class 2 which in turn inherits its attributes and methods from class 1,
+          it is called multi-level inheritance. It forms a child-parent-grandparent relationship.
+        </p>
+<pre class="bg-gray-900 text-green-400 font-mono text-sm p-4 rounded-lg overflow-x-auto"><code>class NuclearForce extends FundamentalForce {
+    void Nuclear() {
+        System.out.println("Nuclear Forces are of two types;");
+        System.out.println("Strong Nuclear Force");
+        System.out.println("Weak Nuclear Force");
+    }
+}
+ 
+class StrongNuclearForce extends NuclearForce {
+    void Strong() {
+        System.out.println("Strong Nuclear Force is responsible for the underlying stability of matter.");
+    }
+}
+ 
+class MultilevelInheritance {
+    public static void main(String[] args) {
+        StrongNuclearForce st = new StrongNuclearForce();
+        st.Force();
+        st.Nuclear();
+        st.Strong();
+    }
+}</code></pre>
+<p class="font-semibold mt-2">Output:</p>
+<pre class="bg-gray-800 text-gray-100 font-mono text-sm p-4 rounded-lg overflow-x-auto"><code>There are four fundamental forces.
+Nuclear Forces are of two types;
+Strong Nuclear Force
+Weak Nuclear Force
+Strong Nuclear Force is responsible for the underlying stability of matter.</code></pre>
+<h3 class="text-xl font-semibold mt-6 mb-2">iii. Hierarchical Inheritance</h3>
+<p class="text-gray-700 mb-4">
+          Hierarchical inheritance is when two or more classes inherit from a single class. This can be visualized as a parent with more than one child.
+        </p>
+<pre class="bg-gray-900 text-green-400 font-mono text-sm p-4 rounded-lg overflow-x-auto"><code>class FundamentalForce {
+    void Force() {
+        System.out.println("There are four fundamental forces.");
+    }
+}
+ 
+class Gravitational extends FundamentalForce {
+    void Gravity() {
+        System.out.println("Fruits fall to the ground due to gravitational Force.");
+    }
+}
+ 
+class Electromagnetic extends FundamentalForce {
+    void Particles() {
+        System.out.println("The electromagnetic force acts between charged particles");
+    }
+}
+ 
+class HierarchicalInheritance {
+    public static void main(String[] args) {
+        System.out.println("Child 1:");
+        Gravitational G = new Gravitational();
+        G.Force();
+        G.Gravity();
+        
+        System.out.println();
+        System.out.println("Child 2");
+        Electromagnetic em = new Electromagnetic();
+        em.Force();
+        em.Particles();
+    }
+}</code></pre>
+<p class="font-semibold mt-2">Output:</p>
+<pre class="bg-gray-800 text-gray-100 font-mono text-sm p-4 rounded-lg overflow-x-auto"><code>Child 1:
+There are four fundamental forces.
+Fruits fall to the ground due to gravitational Force.
+
+Child 2
+There are four fundamental forces.
+The electromagnetic force acts between charged particles</code></pre>
+<p class="text-gray-700 mt-4 mb-2">
+          Inheritance can be further divided into the following types:
+        </p>
+<ul class="list-disc ml-6 text-gray-700 space-y-1">
+<li>Single level</li>
+<li>Multi-level</li>
+<li>Hierarchical</li>
+<li>Multiple</li>
+<li>Hybrid</li>
+</ul>
+<p class="text-gray-700 mt-2 mb-4">
+          Multiple and hybrid inheritance is not directly supported in Java, instead, it is achieved through the use of interfaces in Java.
+        </p>
+<h3 class="text-xl font-semibold mt-6 mb-2">i. Single Inheritance</h3>
+<pre class="bg-gray-900 text-green-400 font-mono text-sm p-4 rounded-lg overflow-x-auto"><code>class FundamentalForce {
+    void Force() {
+        System.out.println("There are four fundamental forces.");
+    }
+}
+ 
+class Gravitational extends FundamentalForce {
+    void Gravity() {
+        System.out.println("Fruits fall to the ground due to gravitational Force.");
+    }
+}
+ 
+class SingleInheritance {
+    public static void main(String[] args) {
+        Gravitational G = new Gravitational();
+        G.Force();
+        G.Gravity();
+    }
+}</code></pre>
+<p class="font-semibold mt-2">Output:</p>
+<pre class="bg-gray-800 text-gray-100 font-mono text-sm p-4 rounded-lg overflow-x-auto"><code>There are four fundamental forces.
+Fruits fall to the ground due to gravitational Force.</code></pre>
+<h3 class="text-xl font-semibold mt-6 mb-2">ii. Multi-level Inheritance</h3>
+<pre class="bg-gray-900 text-green-400 font-mono text-sm p-4 rounded-lg overflow-x-auto"><code>class NuclearForce extends FundamentalForce {
+    void Nuclear() {
+        System.out.println("Nuclear Forces are of two types;");
+        System.out.println("Strong Nuclear Force");
+        System.out.println("Weak Nuclear Force");
+    }
+}
+ 
+class StrongNuclearForce extends NuclearForce {
+    void Strong() {
+        System.out.println("Strong Nuclear Force is responsible for the underlying stability of matter.");
+    }
+}
+ 
+class MultilevelInheritance {
+    public static void main(String[] args) {
+        StrongNuclearForce st = new StrongNuclearForce();
+        st.Force();
+        st.Nuclear();
+        st.Strong();
+    }
+}</code></pre>
+<p class="font-semibold mt-2">Output:</p>
+<pre class="bg-gray-800 text-gray-100 font-mono text-sm p-4 rounded-lg overflow-x-auto"><code>There are four fundamental forces.
+Nuclear Forces are of two types;
+Strong Nuclear Force
+Weak Nuclear Force
+Strong Nuclear Force is responsible for the underlying stability of matter.</code></pre>
+<h3 class="text-xl font-semibold mt-6 mb-2">iii. Hierarchical Inheritance</h3>
+<pre class="bg-gray-900 text-green-400 font-mono text-sm p-4 rounded-lg overflow-x-auto"><code>class FundamentalForce {
+    void Force() {
+        System.out.println("There are four fundamental forces.");
+    }
+}
+ 
+class Gravitational extends FundamentalForce {
+    void Gravity() {
+        System.out.println("Fruits fall to the ground due to gravitational Force.");
+    }
+}
+ 
+class Electromagnetic extends FundamentalForce {
+    void Particles() {
+        System.out.println("The electromagnetic force acts between charged particles");
+    }
+}
+ 
+class HierarchicalInheritance {
+    public static void main(String[] args) {
+        System.out.println("Child 1:");
+        Gravitational G = new Gravitational();
+        G.Force();
+        G.Gravity();
+        
+        System.out.println();
+        System.out.println("Child 2");
+        Electromagnetic em = new Electromagnetic();
+        em.Force();
+        em.Particles();
+    }
+}</code></pre>
+<p class="font-semibold mt-2">Output:</p>
+<pre class="bg-gray-800 text-gray-100 font-mono text-sm p-4 rounded-lg overflow-x-auto"><code>Child 1:
+There are four fundamental forces.
+Fruits fall to the ground due to gravitational Force.
+
+Child 2
+There are four fundamental forces.
+The electromagnetic force acts between charged particles</code></pre>
+                </div>
+                 <!-- Java Comments Content -->
+                <div class="hidden bg-white rounded-xl shadow-sm p-6" id="javaComments">
+                    <div class="flex gap-2 mb-6">
+                        <button class="bg-gray-100 px-4 py-2 rounded-lg hover:bg-gray-200 text-gray-700 flex items-center" onclick="showContent('javaIntro')">
+                            <i class="fas fa-arrow-left mr-2"></i> Back to Intro
+                        </button>
+                        <button class="bg-gray-100 px-4 py-2 rounded-lg hover:bg-gray-200 text-gray-700 flex items-center" onclick="showContent('defaultContent')">
+                            <i class="fas fa-home mr-2"></i> Home
+                        </button>
+                    </div>
+                    <h1 class="text-3xl font-bold text-gray-800 mb-6">Java Comments</h1>
+                    <p class="text-gray-700 mb-4">
+                        Comments in any programming language are ignored by the compiler or the interpreter. A comment is a part of the coding file that the programmer does not want to execute; rather, the programmer uses it to either explain a block of code or to avoid the execution of a specific part of code while testing.
+                    </p>
+                   <p class="text-gray-700 mb-4">There are two types of comments:</p>
+<ul class="list-disc ml-6 text-gray-700 space-y-1">
+<li>Single-line comment</li>
+<li>Multi-line comment</li>
+</ul>
+<h2 class="text-2xl font-semibold mt-6 mb-2">A. Single Line Comments</h2>
+<p class="text-gray-700 mb-4">To write a single-line comment, just add <code class="bg-gray-200 px-1 rounded">//</code> at the start of the line.</p>
+<p class="font-semibold mt-2">Example:</p>
+<pre class="bg-gray-900 text-green-400 font-mono text-sm p-4 rounded-lg overflow-x-auto"><code>package syntax1;
+public class Details {
+    public static void main(String[] args) {
+        // This is a single line comment
+        System.out.println("Hello World!!!");
+    }
+}</code></pre>
+<p class="font-semibold mt-2">Output:</p>
+<pre class="bg-gray-800 text-gray-100 font-mono text-sm p-4 rounded-lg overflow-x-auto"><code>Hello World!!!</code></pre>
+<h2 class="text-2xl font-semibold mt-6 mb-2">B. Multi Line Comments</h2>
+<p class="text-gray-700 mb-4">To write a multi-line comment, just add <code class="bg-gray-200 px-1 rounded">/* ... */</code> at the start and end of the comment block.</p>
+<p class="font-semibold mt-2">Example:</p>
+<pre class="bg-gray-900 text-green-400 font-mono text-sm p-4 rounded-lg overflow-x-auto"><code>package syntax1;
+ 
+public class Details {
+    public static void main(String[] args) {
+        /* This
+         * is 
+         * a
+         * Multiline 
+         * Comment
+         */
+        System.out.println("Hello World!!!");
+    }
+}</code></pre>
+<p class="font-semibold mt-2">Output:</p>
+<pre class="bg-gray-800 text-gray-100 font-mono text-sm p-4 rounded-lg overflow-x-auto"><code>Hello World!!!</code></pre>
+</div><div class="hidden" id="javaDataTypes">
+<div class="flex gap-2 mb-4">
+<button class="bg-gray-200 px-3 py-1 rounded-lg hover:bg-gray-300" onclick="showContent('javaIntro')">← Back to Intro</button>
+<button class="bg-gray-200 px-3 py-1 rounded-lg hover:bg-gray-300" onclick="showContent('defaultContent')">🏠 Home</button>
+</div>
+<h1 class="text-3xl font-bold text-gray-800 mb-6">Java Data Types</h1>
+<p class="text-gray-700 mb-4">
+          There are two forms of data types in Java:
+        </p>
+<ul class="list-disc ml-6 mt-2 text-gray-700">
+<li>Primitive data type</li>
+<li>Non-Primitive data type</li>
+</ul>
+<h2 class="text-2xl font-semibold mt-6 mb-2">Primitive Data Types</h2>
+<ul class="list-disc ml-6 text-gray-700 space-y-2">
+<li><strong>bool:</strong> Boolean data type consists of <code>true</code> and <code>false</code> values.</li>
+<li><strong>char:</strong> Used to store characters.</li>
+<li><strong>byte:</strong> Range -128 to 127 (saves memory).</li>
+<li><strong>short:</strong> Range -32768 to 32767.</li>
+<li><strong>int:</strong> Range -2,147,483,648 to 2,147,483,647.</li>
+<li><strong>long:</strong> Range -9,223,372,036,854,775,808 to 9,223,372,036,854,775,807.</li>
+<li><strong>float:</strong> For decimals. Recommended over double for memory saving.</li>
+<li><strong>double:</strong> For decimals, higher precision.</li>
+</ul>
+<h2 class="text-2xl font-semibold mt-6 mb-2">Non-Primitive Data Types</h2>
+<ul class="list-disc ml-6 text-gray-700 space-y-2">
+<li>Strings</li>
+<li>Arrays</li>
+<li>Classes</li>
+<li>Interfaces</li>
+</ul>
+<h2 class="text-2xl font-semibold mt-6 mb-2">Size &amp; Range</h2>
+<table class="table-auto border-collapse border border-gray-400 text-sm">
+<thead class="bg-gray-200">
+<tr>
+<th class="border border-gray-400 px-4 py-2">Data Type</th>
+<th class="border border-gray-400 px-4 py-2">Size</th>
+<th class="border border-gray-400 px-4 py-2">Range</th>
+</tr>
+</thead>
+<tbody>
+<tr><td class="border px-4 py-2">bool</td><td class="border px-4 py-2">1 bit</td><td class="border px-4 py-2">true, false</td></tr>
+<tr><td class="border px-4 py-2">char</td><td class="border px-4 py-2">2 byte</td><td class="border px-4 py-2">a…z, A…Z</td></tr>
+<tr><td class="border px-4 py-2">byte</td><td class="border px-4 py-2">1 byte</td><td class="border px-4 py-2">-128 to 127</td></tr>
+<tr><td class="border px-4 py-2">short</td><td class="border px-4 py-2">2 byte</td><td class="border px-4 py-2">-32768 to 32767</td></tr>
+<tr><td class="border px-4 py-2">int</td><td class="border px-4 py-2">4 byte</td><td class="border px-4 py-2">-2,147,483,648 to 2,147,483,647</td></tr>
+<tr><td class="border px-4 py-2">long</td><td class="border px-4 py-2">8 byte</td><td class="border px-4 py-2">-9,223,372,036,854,775,808 to 9,223,372,036,854,775,807</td></tr>
+<tr><td class="border px-4 py-2">float</td><td class="border px-4 py-2">4 byte</td><td class="border px-4 py-2">e.g., 6.022f</td></tr>
+<tr><td class="border px-4 py-2">double</td><td class="border px-4 py-2">8 byte</td><td class="border px-4 py-2">e.g., 3.142</td></tr>
+</tbody>
+</table>
+                </div>  
+                 <!-- Python Introduction Content -->
+                <div class="hidden bg-white rounded-xl shadow-sm p-6" id="pythonIntro">
+                    <div class="flex gap-2 mb-6">
+                        <button class="bg-gray-100 px-4 py-2 rounded-lg hover:bg-gray-200 text-gray-700 flex items-center" onclick="showContent('defaultContent')">
+                            <i class="fas fa-home mr-2"></i> Home
+                        </button>
+                    </div>
+                    <h1 class="text-3xl font-bold text-gray-800 mb-6">Python Overview</h1>
+                    <h2 class="text-2xl font-semibold mt-4 mb-2">What is Python</h2>
+                    <p class="text-gray-700 mb-4">
+                        Python is a dynamically typed, general-purpose programming language that supports an object-oriented programming approach as well as a functional programming approach.
+                    </p>
+                   <p class="text-gray-700 mb-4">Python is also an interpreted and high-level programming language.</p>
+<p class="text-gray-700 mb-4">It was created by Guido Van Rossum in 1989.</p>
+<h2 class="text-2xl font-semibold mt-4 mb-2">Features of Python</h2>
+<ul class="list-disc ml-6 text-gray-700 space-y-1">
+<li>Python is simple and easy to understand.</li>
+<li>It is interpreted and platform-independent, which makes debugging very easy.</li>
+<li>Python is an open-source programming language.</li>
+<li>Python provides very big library support. Some of the popular libraries include NumPy, TensorFlow, Selenium, OpenCV, etc.</li>
+<li>It is possible to integrate other programming languages within Python.</li>
+</ul>
+<h2 class="text-2xl font-semibold mt-4 mb-2">What is Python used for</h2>
+<ul class="list-disc ml-6 text-gray-700 space-y-1">
+<li>Python is used in data visualization to create plots and graphical representations.</li>
+<li>Python helps in data analytics to analyze and understand raw data for insights and trends.</li>
+<li>It is used in AI and machine learning to simulate human behavior and to learn from past data without hard coding.</li>
+<li>It is used to create web applications.</li>
+<li>It can be used to handle databases.</li>
+<li>It is used in business and accounting to perform complex mathematical operations along with quantitative and qualitative analysis.</li>
+</ul>
+                </div>
+                <!-- Python Installation Content -->
+                <div class="hidden bg-white rounded-xl shadow-sm p-6" id="pythonInstallation">
+                    <div class="flex gap-2 mb-6">
+                        <button class="bg-gray-100 px-4 py-2 rounded-lg hover:bg-gray-200 text-gray-700 flex items-center" onclick="showContent('pythonIntro')">
+                            <i class="fas fa-arrow-left mr-2"></i> Back to Python Intro
+                        </button>
+                        <button class="bg-gray-100 px-4 py-2 rounded-lg hover:bg-gray-200 text-gray-700 flex items-center" onclick="showContent('defaultContent')">
+                            <i class="fas fa-home mr-2"></i> Home
+                        </button>
+                    </div>
+                    <h1 class="text-3xl font-bold text-gray-800 mb-6">Installation & Getting Started</h1>
+                    <h2 class="text-2xl font-semibold mt-4 mb-2">Steps to Install Python:</h2>
+                    <ol class="list-decimal ml-6 text-gray-700 space-y-2">
+<li>Visit the official python website: <a class="text-blue-600 underline" href="https://www.python.org/" target="_blank">https://www.python.org/</a></li>
+<li>Download the executable file based on your Operating System and version specifications.</li>
+<li>Run the executable file and complete the installation process.</li>
+</ol>
+<h2 class="text-2xl font-semibold mt-6 mb-2">Version:</h2>
+<p class="text-gray-700 mb-4">After installation, check the version of Python by typing the following command:</p>
+<pre class="bg-gray-900 text-green-400 font-mono text-sm p-4 rounded-lg overflow-x-auto"><code>python --version</code></pre>
+<h2 class="text-2xl font-semibold mt-6 mb-2">Starting Python:</h2>
+<p class="text-gray-700 mb-4">
+Open Python IDE or any other text editor of your preferred choice. Let’s understand Python code execution with the simplest print statement. Type the following in the IDE:
+</p>
+<pre class="bg-gray-900 text-green-400 font-mono text-sm p-4 rounded-lg overflow-x-auto"><code>print("Hello World !!!")</code></pre>
+<p class="font-semibold mt-2">Output:</p>
+<pre class="bg-gray-800 text-gray-100 font-mono text-sm p-4 rounded-lg overflow-x-auto"><code>Hello World !!!</code></pre>
+<h2 class="text-2xl font-semibold mt-6 mb-2">Installing Packages:</h2>
+<p class="text-gray-700 mb-4">To install packages in Python, we use the pip command.</p>
+<p class="text-gray-700 mb-2"><strong>Example:</strong></p>
+<pre class="bg-gray-900 text-green-400 font-mono text-sm p-4 rounded-lg overflow-x-auto"><code>pip install "Package Name"</code></pre>
+<p class="text-gray-700 mb-2">The following command installs the pandas package in Python:</p>
+<pre class="bg-gray-900 text-green-400 font-mono text-sm p-4 rounded-lg overflow-x-auto"><code>pip install pandas</code></pre>
+                </div>
+ <!-- Python Functions Content -->
+                <div class="hidden bg-white rounded-xl shadow-sm p-6" id="pythonFunctions">
+                    <div class="flex gap-2 mb-6">
+                        <button class="bg-gray-100 px-4 py-2 rounded-lg hover:bg-gray-200 text-gray-700 flex items-center" onclick="showContent('pythonIntro')">
+                            <i class="fas fa-arrow-left mr-2"></i> Back to Python Intro
+                        </button>
+                        <button class="bg-gray-100 px-4 py-2 rounded-lg hover:bg-gray-200 text-gray-700 flex items-center" onclick="showContent('defaultContent')">
+                            <i class="fas fa-home mr-2"></i> Home
+                        </button>
+                    </div>
+                    <h1 class="text-3xl font-bold text-gray-800 mb-6">Python Functions</h1>
+                    <p class="text-gray-700 mb-4">
+                        A function is a block of code that performs a specific task whenever it is called. In bigger programs, where we have large amounts of code, it is advisable to create or use existing functions that make the program flow organized and neat.
+                    </p>
+                   </p>
+<p class="text-gray-700 mb-4">There are two types of functions:</p>
+<ul class="list-disc ml-6 text-gray-700 space-y-1">
+<li><strong>built-in functions</strong></li>
+<li><strong>user-defined functions</strong></li>
+</ul>
+<h2 class="text-2xl font-semibold mt-6 mb-2">1. built-in functions:</h2>
+<p class="text-gray-700 mb-4">
+These functions are defined and pre-coded in Python. Some examples of built-in functions are as follows:
+</p>
+<p class="bg-gray-100 text-gray-800 font-mono text-sm p-3 rounded-lg">min(), max(), len(), sum(), type(), range(), dict(), list(), tuple(), set(), print(), etc.</p>
+<h2 class="text-2xl font-semibold mt-6 mb-2">2. user-defined functions:</h2>
+<p class="text-gray-700 mb-4">
+We can create functions to perform specific tasks as per our needs. Such functions are called user-defined functions.
+</p>
+<h3 class="text-xl font-semibold mt-4 mb-2">Syntax:</h3>
+<pre class="bg-gray-900 text-green-400 font-mono text-sm p-4 rounded-lg overflow-x-auto"><code>def function_name(parameters):
+    Code and Statements</code></pre>
+<p class="text-gray-700 mb-4">
+Create a function using the <code class="bg-gray-200 px-1 rounded">def</code> keyword, followed by a function name, followed by parentheses <code>()</code> and a colon <code>:</code>.<br/>
+Any parameters and arguments should be placed within the parentheses.<br/>
+Rules for naming functions are similar to those for naming variables.<br/>
+Any statements and other code within the function should be indented.
+</p>
+<h3 class="text-xl font-semibold mt-4 mb-2">Call a function:</h3>
+<p class="text-gray-700 mb-4">
+We call a function by giving the function name, followed by parameters (if any) in the parentheses.
+</p>
+<p class="font-semibold mt-2">Example:</p>
+<pre class="bg-gray-900 text-green-400 font-mono text-sm p-4 rounded-lg overflow-x-auto"><code>def name(fname, lname):
+    print("Hello,", fname, lname)
+ 
+name("Sam", "Wilson")</code></pre>
+<p class="font-semibold mt-2">Output:</p>
+<pre class="bg-gray-800 text-gray-100 font-mono text-sm p-4 rounded-lg overflow-x-auto"><code>Hello, Sam Wilson</code></pre>
+                </div>    
+                 <!-- C++ Introduction Content -->
+                <div class="hidden bg-white rounded-xl shadow-sm p-6" id="cppIntro">
+                    <div class="flex gap-2 mb-6">
+                        <button class="bg-gray-100 px-4 py-2 rounded-lg hover:bg-gray-200 text-gray-700 flex items-center" onclick="showContent('defaultContent')">
+                            <i class="fas fa-home mr-2"></i> Home
+                        </button>
+                    </div>
+                    <h1 class="text-3xl font-bold text-gray-800 mb-6">C++ Overview</h1>
+                    <h2 class="text-2xl font-semibold mt-6 mb-2">What is C++?</h2>
+                    <p class="text-gray-700 mb-4">
+                        C++ is a cross-platform language that can be used to create high-performance applications. C++ was developed by Bjarne Stroustrup, as an extension to the C language. C++ gives programmers a high level of control over system resources and memory.
+                    </p>
+                    <p class="text-gray-700 mb-4">
+C++ was developed by <strong>Bjarne Stroustrup</strong>, as an extension to the C language.<br/>
+Despite being an 80s creation, C++ has been a popular programming language throughout these years.<br/>
+C++ is a <strong>cross-platform language</strong> that can be used to create high-performance applications and software systems.<br/>
+C++ is very close to the hardware, making it comparatively easy for programmers to give the instructions directly to the system without any intermediary, giving programmers a <strong>high level of control</strong> over system resources and memory.
+</p>
+<h2 class="text-2xl font-semibold mt-6 mb-2">Why should we learn C++ / Features of C++?</h2>
+<ul class="list-disc ml-6 text-gray-700 space-y-2">
+<li>C++ is one of the world's most popular programming languages.</li>
+<li>In today's operating systems, GUIs, and embedded systems, C++ is widely used.</li>
+<li>C++ is an <strong>object-oriented programming language</strong> that gives a clear structure to programs and allows code to be reused, lowering development costs.</li>
+<li>With C++, you can develop applications or heavy games that can run on different platforms.</li>
+<li>As C++ is close to other programming languages such as C# and Java, it makes it easy for programmers to switch to C++ or vice versa.</li>
+<li>It is actually very easy to learn.</li>
+</ul>
+<h2 class="text-2xl font-semibold mt-6 mb-2">How is it different from C?</h2>
+<p class="text-gray-700 mb-4">
+The syntax of C++ is almost identical to that of C, as C++ was developed as an extension of C.<br/>
+In contrast to C, <strong>C++ supports classes and objects</strong>, while C does not.
+</p>
+                </div>
+                 <!-- C++ Installation Content -->
+                <div class="hidden bg-white rounded-xl shadow-sm p-6" id="cppInstallation">
+                    <div class="flex gap-2 mb-6">
+                        <button class="bg-gray-100 px-4 py-2 rounded-lg hover:bg-gray-200 text-gray-700 flex items-center" onclick="showContent('cppIntro')">
+                            <i class="fas fa-arrow-left mr-2"></i> Back to C++ Intro
+                        </button>
+                        <button class="bg-gray-100 px-4 py-2 rounded-lg hover:bg-gray-200 text-gray-700 flex items-center" onclick="showContent('defaultContent')">
+                            <i class="fas fa-home mr-2"></i> Home
+                        </button>
+                    </div>
+                    <h1 class="text-3xl font-bold text-gray-800 mb-6">C++ Installation</h1>
+                    <p class="text-gray-700 mb-4">
+                        To start using C++, you need two things: A text editor, like Notepad, to write C++ code. A compiler, like GCC, to translate the C++ code into a language that the computer will understand.
+                    </p>
+                    <li>A compiler, like GCC (MinGW) to translate your C++ code.</li>
+</ul>
+<h2 class="text-2xl font-semibold mt-6 mb-2">Installing VS Code</h2>
+<ol class="list-decimal ml-6 text-gray-700 space-y-2">
+<li>Download from <a class="text-blue-600 underline" href="https://code.visualstudio.com/download" target="_blank">VS Code Website</a></li>
+<li>Run the installer and keep default settings.</li>
+</ol>
+<h2 class="text-2xl font-semibold mt-6 mb-2">Installing Compiler (MinGW)</h2>
+<ol class="list-decimal ml-6 text-gray-700 space-y-2">
+<li>Visit <a class="text-blue-600 underline" href="https://code.visualstudio.com/docs/languages/cpp" target="_blank">VS Code C++ Docs</a></li>
+<li>Select “GCC via Mingw-w64 on Windows”.</li>
+<li>Download and install with default options.</li>
+</ol>
+<h2 class="text-2xl font-semibold mt-6 mb-2">Setting Path</h2>
+<ol class="list-decimal ml-6 text-gray-700 space-y-2">
+<li>Go to MinGW `bin` folder and copy its path.</li>
+<li>Set it in System Environment Variables → PATH.</li>
+</ol>
+<h2 class="text-2xl font-semibold mt-6 mb-2">First Program</h2>
+<pre class="bg-gray-900 text-green-400 font-mono text-sm p-4 rounded-lg overflow-x-auto"><code>#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    cout &lt;&lt; "Hello World!";
+    return 0;
+}
+</code></pre>
+                </div>
+                <!-- C++ Variables Content -->
+                <div class="hidden bg-white rounded-xl shadow-sm p-6" id="cppVariables">
+                    <div class="flex gap-2 mb-6">
+                        <button class="bg-gray-100 px-4 py-2 rounded-lg hover:bg-gray-200 text-gray-700 flex items-center" onclick="showContent('cppIntro')">
+                            <i class="fas fa-arrow-left mr-2"></i> Back to C++ Intro
+                        </button>
+                        <button class="bg-gray-100 px-4 py-2 rounded-lg hover:bg-gray-200 text-gray-700 flex items-center" onclick="showContent('defaultContent')">
+                            <i class="fas fa-home mr-2"></i> Home
+                        </button>
+                    </div>
+                    <h1 class="text-3xl font-bold text-gray-800 mb-6">C++ Variables</h1>
+                    <p class="text-gray-700 mb-4">
+                        Variables are containers for storing data values. In C++, there are different types of variables (defined with different keywords), for example: int - stores integers (whole numbers), without decimals, such as 123 or -123. double - stores floating point numbers, with decimals, such as 19.99 or -19.99. char - stores single characters, such as 'a' or 'B'. Char values are surrounded by single quotes. string - stores text, such as "Hello World". String values are surrounded by double quotes. bool - stores values with two states: true or false.
+                    </p>
+               </p>
+<ul class="list-disc ml-6 text-gray-700 space-y-2">
+<li><strong>int:</strong> Stores integers (whole numbers), without decimals, e.g., <code>63</code> or <code>-1</code>.</li>
+<li><strong>float:</strong> Stores floating point numbers, with decimals, e.g., <code>79.97</code> or <code>-13.26</code>.</li>
+<li><strong>char:</strong> Stores single characters, such as <code>'A'</code> or <code>'z'</code>.</li>
+<li><strong>bool:</strong> Stores true/false values as <code>1</code> or <code>0</code>.</li>
+</ul>
+<h2 class="text-2xl font-semibold mt-6 mb-2">Declaration</h2>
+<pre class="bg-gray-900 text-green-400 font-mono text-sm p-4 rounded-lg overflow-x-auto"><code>
+data_type variable_name;
+data_type variable_name = value;
+  </code></pre>
+<h2 class="text-2xl font-semibold mt-6 mb-2">Variable Scope</h2>
+<p class="text-gray-700 mb-4">
+    Based on its scope, variables can be classified into two types:
+  </p>
+<ul class="list-disc ml-6 text-gray-700 space-y-2">
+<li><strong>Local variables:</strong> Declared inside a function, accessible only within that function.</li>
+<li><strong>Global variables:</strong> Declared outside any function, accessible from anywhere.</li>
+</ul>
+<h2 class="text-2xl font-semibold mt-6 mb-2">Example:</h2>
+<pre class="bg-gray-900 text-green-400 font-mono text-sm p-4 rounded-lg overflow-x-auto"><code>
+#include &lt;iostream&gt;
+using namespace std;
+
+int a = 5; // global variable
+
+void func() {
+    cout &lt;&lt; a &lt;&lt; endl;
+}
+
+int main() {
+    int a = 10; // local variable
+    cout &lt;&lt; a &lt;&lt; endl;
+    func();
+    return 0;
+}
+  </code></pre>
+<p class="font-semibold mt-2">Output:</p>
+<pre class="bg-gray-800 text-gray-100 font-mono text-sm p-4 rounded-lg overflow-x-auto"><code>
+10
+5
+  </code></pre>
+                </div>
+                 <!-- JavaScript Introduction Content -->
+                <div class="hidden bg-white rounded-xl shadow-sm p-6" id="jsIntro">
+                    <div class="flex gap-2 mb-6">
+                        <button class="bg-gray-100 px-4 py-2 rounded-lg hover:bg-gray-200 text-gray-700 flex items-center" onclick="showContent('defaultContent')">
+                            <i class="fas fa-home mr-2"></i> Home
+                        </button>
+                    </div>
+                    <h1 class="text-3xl font-bold text-gray-800 mb-6">JS Introduction</h1>
+                    <p class="text-gray-700 mb-4">
+                        JavaScript is a programming language that is one of the core technologies of the World Wide Web, alongside HTML and CSS. As of 2022, 98% of websites use JavaScript on the client side for webpage behavior, often incorporating third-party libraries. All major web browsers have a dedicated JavaScript engine to execute the code on users' devices.
+                    </p>
+                 <p class="text-gray-700 mb-4">
+    Today, I am creating this JavaScript tutorial to provide you with a resource that will help you learn JavaScript. 
+    Also, you can use this tutorial as a reference later to look up various concepts and code.
+  </p>
+
+  <p class="text-gray-700 mb-4">
+    My name is Harry and I am a Computer Programmer and a YouTuber from CodeWithHarry YouTube channel. 
+    I want to start this tutorial by explaining why we need JavaScript in the first place.
+  </p>
+
+  <p class="text-gray-700 mb-4">
+    Imagine a website as a house. HTML is like the bricks and walls that give it structure. 
+    CSS is like the paint and decorations that make it look nice. 
+    But without JavaScript, the house won't have any lights or running water—nothing would work or move.
+  </p>
+
+  <p class="text-gray-700 mb-4">
+    JavaScript is what makes a website interactive. It's like adding electricity to the house. 
+    It lets you click buttons to open doors, turn on lights, or even play music. 
+    So, without JavaScript, a website would be like a house where nothing really happens—you could look at it.
+  </p>
+
+  <p class="text-gray-700 mb-4">
+    JavaScript is used for frontend programming but it is also used for backend programming using Node.js. 
+    Let's take a step back and understand all these concepts one by one.
+  </p>
+
+  <h2 class="text-2xl font-semibold mb-2">What is Programming?</h2>
+  <p class="text-gray-700 mb-4">
+    Programming is a way to talk to computers. A language like Hindi, English, or Bengali can be used to talk to a human 
+    but for computers, we need straightforward instructions.
+  </p>
+  <p class="text-gray-700 mb-4">
+    Programming is the act of constructing a program, a set of precise instructions telling a computer what to do. 
+    It involves designing, writing, testing, debugging, and maintaining source code using programming languages and tools.
+  </p>
+
+  <h2 class="text-2xl font-semibold mb-2">What is ECMAScript?</h2>
+  <p class="text-gray-700 mb-4">
+    ECMAScript is a standard on which JavaScript is based! It was created to ensure that different documents on JavaScript 
+    are talking about the same language.
+  </p>
+
+  <h3 class="text-xl font-semibold mb-2">ECMAScript Versions</h3>
+  <ul class="list-disc list-inside text-gray-700 mb-4">
+    <li>ES1 was first released in 1997.</li>
+    <li>ES6 (ECMAScript 2015) was a major revision released in 2015.</li>
+    <li>The latest version is ECMAScript 2022 (ES13).</li>
+  </ul>
+
+  <h2 class="text-2xl font-semibold mb-2">What is JavaScript?</h2>
+  <ul class="list-disc list-inside text-gray-700 mb-4">
+    <li>Lightweight, object-oriented programming (OOP) language.</li>
+    <li>Scripting language for web pages.</li>
+    <li>Adds interactivity and dynamic effects to web pages.</li>
+    <li>File extension is <code>.js</code>.</li>
+    <li>Used in both frontend and backend (with Node.js).</li>
+    <li>Frontend frameworks: React, Angular, Vue.</li>
+    <li>Backend frameworks: Express, Node.</li>
+  </ul>
+
+  <p class="text-gray-700 mb-4">
+    In this tutorial, we will learn JavaScript in depth.
+  </p>
+                </div>
+                 <div class="hidden" id="jsExecution">
+  <h1 class="text-3xl font-bold text-gray-800 mb-6">JS Execution</h1>
+
+  <h2 class="text-2xl font-semibold mb-2">Do we need to install JavaScript?</h2>
+  <p class="text-gray-700 mb-4">
+    The answer is <strong>NO</strong>. JavaScript is present everywhere in browsers, on your phone, etc.
+  </p>
+
+  <h2 class="text-2xl font-semibold mb-2">How to execute JavaScript?</h2>
+  <ul class="list-disc list-inside text-gray-700 mb-4">
+    <li>JavaScript can be executed right inside one’s browser. You can open the JS console and start writing JS there.</li>
+    <li>Another way to execute JS is a runtime like <strong>Node.js</strong> which can be installed and used to run JavaScript code.</li>
+    <li>Yet another way is by inserting it inside the <code>&lt;script&gt;</code> tag of an HTML document.</li>
+  </ul>
+
+  <h2 class="text-2xl font-semibold mb-2">What is JavaScript?</h2>
+  <p class="text-gray-700 mb-4">
+    JavaScript is a programming language commonly used in web development. It is a client-side language, which means it is executed by the user's web browser rather than the server. 
+    This allows JavaScript to interact with the user and create dynamic, interactive web pages.
+  </p>
+  <p class="text-gray-700 mb-4">
+    JavaScript is often used in combination with HTML and CSS to create interactive and engaging web pages. 
+    It powers effects like drop-down menus, image sliders, and pop-up windows.
+  </p>
+
+  <h2 class="text-2xl font-semibold mb-2">Getting Started with JavaScript</h2>
+  <p class="text-gray-700 mb-4">
+    To start using JavaScript, you'll need a <strong>text editor</strong> and a <strong>web browser</strong>. 
+    Popular editors include Sublime Text, Atom, and Visual Studio Code.
+  </p>
+  <p class="text-gray-700 mb-4">
+    Once your editor is set up, create a new file with a <code>.js</code> extension and start typing your code. 
+    Save the file and open it in your web browser to see the results.
+  </p>
+</div>
+<div class="hidden" id="jsNodeInstallation">
+  <h1 class="text-3xl font-bold text-gray-800 mb-6">Node.js Installation</h1>
+
+  <p class="text-gray-700 mb-4">
+    Node.js is an open-source, cross-platform JavaScript runtime environment that executes JavaScript code outside of a web browser. 
+    It is commonly used for building server-side applications, command-line tools, and scalable network programs.
+  </p>
+
+  <h2 class="text-2xl font-semibold mb-2">Steps to Install Node.js</h2>
+  <ol class="list-decimal list-inside text-gray-700 mb-4">
+    <li>
+      <strong>Download the installer:</strong> Go to the official Node.js website 
+      <a href="https://nodejs.org/" class="text-blue-600 underline" target="_blank">https://nodejs.org/</a> 
+      and download the latest version.
+    </li>
+    <li>
+      <strong>Run the installer:</strong> Double-click the downloaded file and follow the installation prompts.
+    </li>
+    <li>
+      <strong>Verify installation:</strong> Open a terminal/command prompt and type:
+      <pre class="bg-gray-900 text-green-400 font-mono text-sm p-4 rounded-lg overflow-x-auto"><code>node -v</code></pre>
+      <p class="font-semibold mt-2">Output:</p>
+      <pre class="bg-gray-800 text-gray-100 font-mono text-sm p-4 rounded-lg overflow-x-auto"><code>v18.16.0</code></pre>
+    </li>
+  </ol>
+
+  <p class="text-gray-700 mb-4">
+    That's it! You should now have Node.js installed and can run JavaScript code using the <code>node</code> command.
+  </p>
+
+  <h2 class="text-2xl font-semibold mb-2">Running JavaScript with VS Code</h2>
+  <ol class="list-decimal list-inside text-gray-700 mb-4">
+    <li><strong>Install VS Code:</strong> Download it from <a href="https://code.visualstudio.com/" class="text-blue-600 underline" target="_blank">https://code.visualstudio.com/</a>.</li>
+    <li><strong>Create a new file:</strong> In VS Code, make a file with <code>.js</code> extension.</li>
+    <li><strong>Write your code:</strong> Example:
+      <pre class="bg-gray-900 text-green-400 font-mono text-sm p-4 rounded-lg overflow-x-auto"><code>console.log("Hello from Node.js!");</code></pre>
+    </li>
+    <li><strong>Open Command Palette:</strong> Press <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>P</kbd> and select "Run JavaScript file in Terminal".</li>
+    <li><strong>View Output:</strong> Output will show in VS Code's terminal.</li>
+  </ol>
+
+  <h2 class="text-2xl font-semibold mb-2">Run via Terminal</h2>
+  <p class="text-gray-700 mb-4">
+    Alternatively, run the JS file directly from terminal:
+  </p>
+  <pre class="bg-gray-900 text-green-400 font-mono text-sm p-4 rounded-lg overflow-x-auto"><code>node myfile.js</code></pre>
+
+  <p class="font-semibold mt-2">Output:</p>
+  <pre class="bg-gray-800 text-gray-100 font-mono text-sm p-4 rounded-lg overflow-x-auto"><code>Hello from Node.js!</code></pre>
+</div>    
+{% endblock %}
+
+{% block extra_js %}
+ <script src="{% static 'js/tutorial.js' %}"></script>   
+ {% endblock %}     

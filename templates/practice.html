@@ -1,16 +1,13 @@
-
+{% extends 'base.html' %}
 {% load static %}
 
+{% block title %}CodePractice - Learn & Solve{% endblock %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CodePractice - Learn & Solve</title>
-  <link rel="stylesheet" href="{% static 'css/practice.css'%}" />
-</head>
-<body>
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'css/practice.css' %}" />
+{% endblock %}
+
+{% block content %}
   <!-- Background Slider -->
   <div class="slider">
     <div class="slide" style="background-image: url('https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg');"></div>
@@ -88,7 +85,7 @@
         </select>
       </div>
 
-      <!-- Problem List -->
+      <!-- Problem List + Editor -->
       <div id="listAndEditor" style="display:flex;gap:18px;flex-wrap:wrap">
         <div style="flex:1;min-width:300px">
           <ul id="questionList"></ul>
@@ -115,10 +112,11 @@
       </div>
     </div>
   </div>
+{% endblock %}
 
+{% block extra_js %}
   <!-- Problems data (250 generated entries) -->
   <script src="problems.js"></script>
   <!-- Main script -->
-  <script src="{% static 'js/practice.js'%}"></script>
-</body>
-</html>
+  <script src="{% static 'js/practice.js' %}"></script>
+{% endblock %}
