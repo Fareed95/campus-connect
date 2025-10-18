@@ -1,15 +1,18 @@
 import os
 from pathlib import Path
+import os
 from dotenv import load_dotenv
-
 load_dotenv()
+
+SECRET_KEY = os.getenv('SECRET_KEY')
+DEBUG = os.getenv('DEBUG') == 'True'
+
 
 # --- Basic Setup ---
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = 'your-django-secret-key'  # change this for production
-DEBUG = True
-ALLOWED_HOSTS = []
+
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', 'localhost').split(',')
 
 # --- Installed Apps ---
 INSTALLED_APPS = [

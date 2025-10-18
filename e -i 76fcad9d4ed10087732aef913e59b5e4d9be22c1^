@@ -1,0 +1,17 @@
+[33mcommit 98617303f851391e1a6ca0328278cf3d08dca566[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m
+Author: shaqib qureshi <qureshishaqib4@gmail.com>
+Date:   Sat Oct 18 05:47:54 2025 -0700
+
+    Safe: moved keys to .env
+
+[33mcommit 76fcad9d4ed10087732aef913e59b5e4d9be22c1[m
+Author: shaqib qureshi <qureshishaqib4@gmail.com>
+Date:   Sat Oct 18 04:47:13 2025 -0700
+
+    Initial commit
+
+[33mcommit 06948b408a5566dfd1b1a8735c613bc26fa98ca1[m
+Author: shaqib qureshi <qureshishaqib4@gmail.com>
+Date:   Sun Sep 21 04:08:06 2025 -0700
+
+    Initial commit
