@@ -11,8 +11,11 @@ def home(request):
 def dashboard(request):
     return render(request, "dashboard.html")
 
+
 def department(request):
-    return render(request, "department.html")
+    notes = Note.objects.all().order_by('-uploaded_at')  
+    print(notes)
+    return render(request, "department.html", {"notes": notes})
 
 def practice(request):
     return render(request, "practice.html")
